@@ -1,19 +1,19 @@
-Libgdx is a cross-platform game and visualization development framework. It currently supports Windows, Linux, Mac OS X, Android, iOS and HTML5 as target platforms. 
+Libgdx是一个跨平台的游戏开发框架。目前Libgx支持的平台包括Windows, Linux, Mac OS X, Android, iOS 和 HTML5。
 
-Libgdx allows you to write your code once and deploy it to multiple platforms without modification. Instead of waiting for your latest modifications to be deployed to your device or to be compiled to HTML5, you can benefit from an extremely fast iteration cycle by coding your application mainly in a desktop environment. You can use all the tools of the Java ecosystem to be as productive as you can be.
+Libgdx可以帮助你在不需要其他额外操作的情况下将同一套代码部署到不同的平台上。你不在需要等待你最新的修改部署到测试设备或者编译成HTML5，你可以
+轻松享受桌面环境开发的快捷与便利。同时你可以使用Java生态圈的所有工具来帮助你提升开发效率。
 
-Libgdx lets you go as low-level as you want, giving you direct access to file systems, input devices, audio devices and OpenGL via a unified OpenGL ES 2.0 and 3.0 interface. 
+Libgdx可以让你近距离的控制你的代码，你可以直接访问文件系统，输入设备，音频设备，还可以通过OpenGL ES 2.0 和 3.0的接口操作OpenGL。
 
-On top of these low-level facilities we built a powerful set of APIs that help you with common game development tasks like rendering sprites & text, building user interfaces, playing back sound effects and music streams, linear algebra and trigonometry calculations, parsing JSON and XML, and so on.
+在低层次的抽象之上，Libgdx还提供了开发游戏所常用的封装。比如绘制纹理，构建用户界面，播放背景音效，线性代数和三角计算，解析Json和Xml等等。
 
-Where necessary, libgdx leaves the realm of Java and resorts to native code to aim for the best possible performance. All of this functionality is hidden behind Java APIs so you don't have to worry about cross-compiling native code for all platforms. Many parts of libgdx work around known platform issues so you don't have to deal with them.
+在必要时，Libgdx会使用本地代码来提升效率，你不需要担心这些本地代码的兼容性问题。Libgdx是一个使用广泛的开源项目，在成千上万的使用者的帮助下，Libgdx的跨平台性能稳定而高效。
 
-Libgdx aims to be a framework rather than an engine, acknowledging that there is no one-size-fits-all solution. Instead we give you powerful abstractions that let you chose how you want to write your game or application.
+Libgdx致力于成为一款出色的框架而不是引擎，因为很难有一个万能通用的解决方案。相反，Libgdx提供了便利的抽象和封装让你自由选择如何去组织你的游戏或者应用。
 
-# Standing on the Shoulders of Giants
+# 站在巨人肩上
 
-Libgdx ties in a lot of third party libraries to provide its functionality:
-
+Libgdx使用了很多成熟的第三方库来实现相关功能：
 
 <a href="http://www.opengl.org"><img src="http://www.opengl.org/img/opengl_logo.jpg"></a> |
 <a href="http://nothings.org"><img src="http://nothings.org/images/juggle.gif"></a>
