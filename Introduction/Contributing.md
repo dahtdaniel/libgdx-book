@@ -39,40 +39,41 @@ Libgdx没有官方的编码规范。我们遵循常见的Java风格，同时我�
 
 如果你添加了新文件，确保它们包含[Apache文件头部说明](https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/Application.java)。
 
-If you create a new class, please add at least class documentation that explains the usage and scope of the class. You can omit Javadoc for methods that are self-explanatory.
+如果你创建了一个新的类，请至少添加文档来说明类的使用方法和范围。当然，你可以省略一些简单的、不言自明的方法。
 
-If your class is explicitly thread-safe, mention it in the Javadoc. The default assumption is that classes are not thread-safe, to reduce the number of costly locks in the code base.
+如果你的类是显式线程安全的，请在Javadoc中提及这点。默认的假设是类不是线程安全的，锁的使用时昂贵的，我们希望减少它们在代码库的数量。
 
-### Cross-platform compatibility ###
+### 跨平台兼容性 ###
 
-The GWT backend [doesn't support](http://www.gwtproject.org/doc/latest/DevGuideCodingBasicsCompatibility.html) all Java features. When writing generic code, please be aware of some common limitations:
-  * Formatting. String.format() is unavailable, use StringBuilder instead or concatenate Strings directly.
-  * Regular expressions. A basic emulation of [Pattern](https://github.com/libgdx/libgdx/blob/master/backends/gdx-backends-gwt/src/com/badlogic/gdx/backends/gwt/emu/java/util/regex/Pattern.java) and [Matcher](https://github.com/libgdx/libgdx/blob/master/backends/gdx-backends-gwt/src/com/badlogic/gdx/backends/gwt/emu/java/util/regex/Matcher.java) is provided.
-  * Reflection. Use the utilities in [com.badlogic.gdx.utils.reflect](https://github.com/libgdx/libgdx/tree/master/gdx/src/com/badlogic/gdx/utils/reflect) package instead.
-  * Multithreading. There is only support for [Timers](https://github.com/libgdx/libgdx/tree/master/gdx/src/com/badlogic/gdx/utils/Timer.java).
+GWT的实现[不能支持]((http://www.gwtproject.org/doc/latest/DevGuideCodingBasicsCompatibility.html))所有的java特性。在编写代码的时候，请注意一些常见的局限性：
+  * 格式化。 String.format()是不支持的，使用StringBuilder或者直接拼接字符串。
+  * 正则表达式。 一个有限功能的[Pattern](https://github.com/libgdx/libgdx/blob/master/backends/gdx-backends-gwt/src/com/badlogic/gdx/backends/gwt/emu/java/util/regex/Pattern.java)和[Matcher(https://github
+  .com/libgdx/libgdx/blob/master/backends/gdx-backends-gwt/src/com/badlogic/gdx/backends/gwt/emu/java/util/regex/Matcher.java)是可用的。
+  * 反射. 使用Libgdx提供的反射工具[com.badlogic.gdx.utils.reflect](https://github.com/libgdx/libgdx/tree/master/gdx/src/com/badlogic/gdx/utils/reflect)。
+  * 多线程. 只支持[Timers](https://github.com/libgdx/libgdx/tree/master/gdx/src/com/badlogic/gdx/utils/Timer.java)。
 
-If you add any new classes, determine if they are compatible with GWT and add either include or exclude elements to the [GWT module](https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx.gwt.xml).
+如果你添加了新的类，请判断它是否与GWT兼容，并添加信息到[GWT module](https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx.gwt.xml)中。
 
-Some classes (such as Matrix4 or BufferUtils) are emulated in the GWT backend due to certain compatibility requirements or native code. If you modify any these classes, please make sure that your changes get ported to the emulated version.
+一些类（比如Matrix4或者BufferUtils）为了保证GWT的兼容性在本地代码中做了特殊处理。如果你修改了这些类，请确保你的修改同样在这些地方体现。
 
-### Performance Considerations ###
+### 性能方面的考虑 ###
 
-Libgdx is meant to run on both desktop and mobile platforms, including browsers (JavaScript!). While the desktop HotSpot VM can take quite a beating in terms of unnecessary allocations, Dalvik and consorts don't.
+Libgdx可以运行在桌面和移动环境，包括浏览器（Javascript）。但是需要注意的是桌面环境的性能远远超过其他环境。桌面环境的HotSpot VM可以提供一些不必要的资源来运行程序，但是Dalvik等其他环境不能。
 
-A couple of guidelines:
+一些常见指导准则:
 
-  * Avoid temporary object allocation wherever possible
-  * Do not make defensive copies
-  * Avoid locking, libgdx classes are by default not thread-safe unless explicitly specified
-  * Do not use boxed primitives
-  * Use the collection classes in the [com.badlogic.gdx.utils package](https://github.com/libgdx/libgdx/tree/master/gdx/src/com/badlogic/gdx/utils)
-  * Do not perform argument checks for methods that may be called thousands of times per frame
-  * Use pooling if necessary, if possible, avoid exposing the pooling to the user as it complicates the API
+  * 尽可能避免临时对象分配
+  * 不要拷贝副本
+  * 避免锁，Libgdx中的类都是默认非线程安全的，除非明确说明
+  * 使用Libgdx提供的集合类[com.badlogic.gdx.utils package](https://github.com/libgdx/libgdx/tree/master/gdx/src/com/badlogic/gdx/utils)
+  * 不要进行参数检查，有时候这样会导致大量的调用
+  * 尽可能使用池，如果可能也不要暴露池给开发人员，它们是复杂的API。
 
 ### Git ###
 
-Most of the libdgx team members are Git novices, as such we are just learning the ropes ourselves. To lower the risk of getting something wrong, we'd kindly ask you to keep your pull requests small if possible. A change-set of 3000 files is likely not to get merged.
+Libgdx的大部分成员是Git新手。为了避免一些问题，请保持你的Pull Request尽可能小。如果一个提交修改了超过过多文件，很可能它们不会被合并。
 
-We do open new branches for bigger API changes. If you help out with a new API, make sure your pull request targets that specific branch.
+对于较大的API修改，我们会新建一个分支。如果你的提交和它们相关，请确保你的Pull Request指定了正确的分支。
 
-Pull requests for the master repository will be checked by multiple core contributors before inclusion. We may reject your pull requests to master if we do not deem them to be ready or fitting. Please don't take offense in that case. Libgdx is used by thousands of projects around the world, we need to make sure things stay somewhat sane and stable.
+提交到master分支的Pull Request会被多个核心开发人员检查。如果我们认为它们还不适合合并，我们将会拒绝你的合并请求。
+希望你能够理解这种情况。Libgdx被大量项目使用，我们必须确保它健壮而可用。
