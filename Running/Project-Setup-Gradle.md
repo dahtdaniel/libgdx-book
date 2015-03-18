@@ -1,16 +1,25 @@
-### Creating a libgdx project
-Libgdx comes with a file called `gdx-setup.jar` which is an executable UI and command line tool. You can simply execute the JAR file which will open the setup UI.
-<br>To execute the JAR file at the command line:
-<br>java -jar gdx-setup.jar
+### 新建libgdx项目
+Libgdx提供了一个初始化工具 `gdx-setup.jar` ，包含了一个可执行的UI和命令行模式。直接执行该文件你就可以看到该工具界面。
 
-## [Download gdx-setup.jar](https://bitly.com/1i3C7i3)
+如果你希望从命令行启动，使用命令: `java -jar gdx-setup.jar`
 
-Specify your application name, your Java package name, the name of your main class, the output directory, and the path to your android sdk. Next, you can select what platforms you want to support. **Note: once chosen, you'll have to add new platforms manually!**. Finally, you can select extensions to be included in your app. Some may not work on all platforms, for which you'll get a warning. When you've set everything, click "Generate". **Now you are ready to import the project into your IDE, run, debug and package it!**
+## [下载gdx-setup.jar](https://bitly.com/1i3C7i3)
 
-  * [[Eclipse|Gradle and Eclipse]]
-  * [[Intellij IDEA|Gradle and Intellij IDEA]]
-  * [[NetBeans|Gradle and NetBeans]]
-  * [[Commandline|Gradle on the Commandline]]
+指定你的应用名称，Java包名以及启动类名称，输出目录和Android SDK目录。
+
+然后选择你希望支持的平台。
+**提示: 一旦项目生成，你只能手动自行添加新的平台支持!**。
+
+Libgdx提供了一些扩展，有部分扩展不能兼容所有平台，对于这些扩展，一旦你选择以后软件会给出你提示。
+
+一切完成后点击"Generate"。
+
+**项目文件生成后，你就可以导入到IDE并运行和调试了。**
+
+  * [[Eclipse|Eclipse]]
+  * [[Intellij IDEA|Intellij-Idea]]
+  * [[NetBeans|NetBeans]]
+  * [[Commandline|Commandline]]
 
 Note that the Advanced button lets you set the project generation to generate Eclipse and/or IDEA projects **without** Gradle integration, as described in more detail in the wiki article about [workflow without Gradle](Improving-workflow-with-Gradle#how-to-remove-gradle-ide-integration-from-your-project), as well as options to use an alternative repository to Maven Central and to not force downloading dependencies.
 
