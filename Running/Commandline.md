@@ -1,120 +1,130 @@
-This article will show you how you can run your application from the command line and package it for distribution for the different platforms!
-## Contents
-* [**Prerequisites**](#setting-up-android_home)
- * [Setting the ANDROID_HOME variable] (#setting-up-android_home)
-* [**Running**](#running-the-project)
- * [Running on Desktop] (#running-the-desktop-project)
- * [Running on Android] (#running-the-android-project)
- * [Running on iOS] (#running-the-ios-project)
- * [Running HTML] (#running-the-html-project)
-* [**Packaging**](#packaging-the-project)
- * [Packaging Desktop](#packaging-for-the-desktop)
- * [Packaging Android](#packaging-for-android)
- * [Packaging iOS](#packaging-for-ios)
- * [Packaging HTML](#packaging-for-the-web)
-* [**Debugging/Problems**](#debugging-and-common-problems)
- * [Gradle tasks failing] (#gradle-tasks-are-failing)
- * [Common problems] (#common-problems)
- * [Debugging projects] (#debugging-projects)
-* [**Tweaking**](#tweaking)
+这一章节将向你展示如何在命令行中运行你的程序，并且打包到不同的平台。
+
+(译者：AyoCrazy  http://www.ayogame.cn/)
+
+## 内容
+* [**前提**](#配置android_home)
+ * [配置ANDROID_HOME环境变量] (#配置android_home)
+* [**运行**](#运行项目)
+ * [运行在Desktop] (#运行desktop项目)
+ * [运行在Android] (#运行android项目)
+ * [运行在iOS] (#运行ios项目)
+ * [运行HTML] (#运行html项目)
+* [**打包**](#打包项目)
+ * [打包Desktop项目](#为desktop项目打包)
+ * [打包Android项目](#为android项目打包)
+ * [打包iOS项目](#为ios项目打包)
+ * [打包HTML项目](#为web项目打包)
+* [**调试/问题**](#调试与常见问题)
+ * [Gradle任务失败] (#gradle任务失败)
+ * [常见问题] (#常见问题)
+ * [调试项目] (#调试项目)
+* [**调整**](#调整)
 
 ***
 
-## Setting up ANDROID_HOME
-The ANDROID_HOME environment variable needs to be pointing to a valid android SDK before you do any command line wizardry.
+## 配置ANDROID_HOME
+在你做任何命令行操作之前，ANDROID_HOME环境变量必须指向一个有效的Android SDK。
 
 Windows: `set ANDROID_HOME=C:/Path/To/Your/Android/Sdk`
 
 Linux, Mac OS X: `export ANDROID_HOME=/Path/To/Your/Android/Sdk`
 
-Alternatively you can create a file called "local.properties" with the following content: `sdk.dir /Path/To/Your/Android/Sdk`
+或者你也可以创建一个命名为"local.properties"的文件，内容如下：`sdk.dir /Path/To/Your/Android/Sdk`
 
-## Running the project
-Gradle let's you easily run a project from the commandline. Just use the gradlew command specify your target platform and the run command for that platform.
+## 运行项目
+Gradle让你很方便地在命令行中运行项目。只需要使用gradlew命令行指定你的目标平台，以及使用该平台的运行命令。
 
-[**Desktop**](#running-the-desktop-project) - [**Android**](#running-the-android-project) - [**iOS**](#running-the-ios-project) - [**HTML**](#running-the-html-project)
+[**Desktop**](#运行desktop项目) - [**Android**](#运行android项目) - [**iOS**](#运行ios项目) - [**HTML**](#运行html项目)
 
-### Running the desktop project
+### 运行desktop项目
 `gradlew desktop:run`
 
-This compiles your core and desktop project, and runs the desktop starter. The working directory is the android project's assets folder!
-
-### Running the Android project
+这条命令编译你的core项目和desktop项目，并且运行desktop启动器。工作路径是android项目的assets文件夹。
+### 运行Android项目
 `gradlew android:installDebug android:run`
 
-This task will create a debug APK of your application, install it on the first connected emulator or device and start the main activity. The process is split into two tasks because the Android Gradle plugin lets you create multiple flavors of your app (e.g. debug as above, release, ...). You can find more information on the [Android Gradle Plugin site](http://tools.android.com/tech-docs/new-build-system/user-guide).
 
-### Running the iOS project
+这条命令将为你的应用创建一个debug APK(调试安装包)，把它安装在第一次连接的虚拟机或者真机，并且启动main activity(Android的主页面)。
+进程被分到两个任务中，因为Android Gradle插件可以让你为你的应用创建多个flavors。
+你可以在[Android Gradle Plugin site](http://tools.android.com/tech-docs/new-build-system/user-guide)找到更多信息。
+
+### 运行 iOS 项目
 `gradlew ios:launchIPhoneSimulator`
 
 `gradlew ios:launchIPadSimulator`
 
 `gradlew ios:launchIOSDevice`
 
-The first two commands will launch your app on an iPhone or iPad simualtor, the last command will launch your ios project on a connected iDevice, provided it is provisioned. Please refer to Apple's docs on how to provision a device. Note that the first time you run your iOS project, the compilation will take a long time. Compilation time will decrease significantly on subsequent runs!
-
-### Running the HTML project
+前两条命令将在iPhone或ipad模拟器中启动你的程序，最后一条命令将在一个已连接的真机上运行你的iOS项目，如果已经配置好的话。请参阅Apple的文档关于如何配置真机。请注意，当你第一次运行iOS项目，编译需要很长的时间。编译时间将会在以后的运行中显著降低！
+### 运行HTML项目
 `gradlew html:superDev`
 
-This will start your application in [GWT Super Dev Mode](http://www.badlogicgames.com/wordpress/?p=3073), which compiles your Java code to Javascript, and allows you to debug your Java code directly in the browser. If you see the message `Next, visit: http://localhost:9876` in your shell, open the browser and navigate to that address. Drag the "Dev Mode On" bookmarklet do your browser bookmarks bar. Next open [http://localhost:8080/html](http://localhost:8080/html). This is your application running in the browser! If you change any of your Java code in the core project, just click the bookmarklet, then click "Compile". The changes will take effect in a few seconds. If you modify your assets, you have to restart the server with the above command.
+这条命令将以[GWT Super Dev模式](http://www.badlogicgames.com/wordpress/?p=3073)启动你的应用，此模式将你的Java代码编译成Javascript，并允许你在你的浏览器中直接调试Java代码。
+如果你在命令行窗口看到这条信息`Next, visit: http://localhost:9876`，打开你的浏览器并跳转到这个地址。拖拽"Dev Mode On"标签到你浏览器的书签栏。
+接下来，打开[http://localhost:8080/html](http://localhost:8080/html)。这里就是你运行在浏览器上的应用！如果你改变了core项目中的任何JAVA代码，只需要点一下书签，然后点击“Compile”。改变的代码几秒钟后就会产生效果。如果你修改了你的资源，你必须用上面的命令重启服务。
 
-## Packaging the project
-Every platform has a different kind of distribution format. In this section we'll see how we can generate those distributions via Gradle.
+## 打包项目
+每个平台都有不同的发布方式。在这一节我们来看看如何通过Gradle来打包发布。
 
-[**Desktop**](#packaging-for-the-desktop) - [**Android**](#packaging-for-android) - [**iOS**](#packaging-for-ios) - [**HTML**](#packaging-for-the-web)
+[**Desktop**](#为desktop项目打包) - [**Android**](#为android项目打包) - [**iOS**](#为ios项目打包) - [**HTML**](#为web项目打包)
 
-### Packaging for the desktop
+### 为desktop项目打包
 `gradlew desktop:dist`
 
-This will create a runnable JAR file located in the `desktop/build/libs/` folder. It contains all necessary code as well as all your art assets from the android/assets folder and can be run either by double clicking or on the command line via `java -jar jar-file-name.jar`. Your audience must have a JVM installed for this to work. The JAR will work on Windows, Linux and Mac OS X!
+This will create a runnable JAR file located in the `desktop/build/libs/` folder. It contains all necessary code as well as all your art assets from the android/assets folder and can be run either by double clicking or on the command line via `java -jar jar-file-name.jar`.
+Your audience must have a JVM installed for this to work. The JAR will work on Windows, Linux and Mac OS X!
+这条命令将在`desktop/build/libs/`目录下创建一个可执行的JAR文件。它包含了所有的必需代码，也包含了所有你在android/assets目录下的资源，并且可以通过双击它或者使用命令行`java -jar jar-file-name.jar`来运行。
+你的用户必需已经为此安装了一个JVM才能运行。JAR文件可以运行在Windows，Linux和Mac OS X!
 
-**If you want to package your JAR with a JVM for distribution, you can use our [packr tool!](https://github.com/libgdx/packr). This way you audiences will not need to install a JVM at the expense of about 23-30mb bigger download sizes per platform.**
-
-### Packaging for Android
+**如果你想要打包成一个带有JVM的JAR来发布，你可以使用我们的 [packr tool!](https://github.com/libgdx/packr)。用这种方式你的用户就不需要安装JVM，那将花费大约每个平台23-30mb的下载量。
+### 为android项目打包
 `gradlew android:assembleRelease`
 
-This will create an unsigned APK file in the `android/build/outputs/apk` folder. Before you can install or publish this APK, you must [sign it](http://developer.android.com/tools/publishing/app-signing.html). The APK build by the above command is already in release mode, you only need to follow the steps for keytool and jarsigner. You can install this APK file on any Android device that allows [installation from unknown sources](http://developer.android.com/distribute/open.html#unknown-sources).
+这条命令将在`android/build/outputs/apk`目录下创建一个未签名的APK。在你安装或者发布这个APK之前，你必需对它进行签名 [sign it](http://developer.android.com/tools/publishing/app-signing.html)。通过上面的命，APK就以release模式创建完成，你只需要遵循Keytool和Jarsigner步骤。
+你可以安装这个APK文件到任何允许未知源安装的Android设备 [installation from unknown sources](http://developer.android.com/distribute/open.html#unknown-sources)。
 
-### Packaging for iOS
+### 为ios项目打包
 `gradlew ios:createIPA`
 
-This will create an IPA in the `ios/build/robovm` folder that you distribute to the Apple App Store. You can follow Apple's guide on [app store distribution](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/Introduction/Introduction.html)
-
-### Packaging for the Web
+这条命令将在 `ios/build/robovm` 目录下创建一个你将发布到Apple App Store的IPA。你可以按照Apple的引导来做 [app store distribution](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/Introduction/Introduction.html)。
+###为web项目打包
 `gradlew html:dist`
 
 This will compile your your app to Javascript and place the resulting Javascript, HTML and asset files in the `html/build/dist/` folder. The contents of this folder have to be served up by a web server, e.g. Apache or Nginx. Just treat the contents like you'd treat any other static HTML/Javascript site. There is no Java or Java Applets involved!
-
-If you have Python installed, you can test your distribution by executing the following in the `html/build/dist` folder:
+这条命令会将你的应用编译成为Javascript，并且将编译好的Javascript，Html和资源文件放到`html/build/dist/`目录下。这个目录下的内容必须部署到一个Web服务器上，例如Apache或者Nginx。就像你对待其他的静态HTML/Javascript站点一样。这里不再涉及到Java或者Java Applets。
+如果你已经安装了Python，你可以通过在 `html/build/dist`目录下执行以下命令来测试你发布的应用。
 
 `python -m SimpleHTTPServer`
 
-You can then open a browser to [http://localhost:8000](http://localhost:8000) and see your project in action.
+然后你打开一个浏览器跳转到 [http://localhost:8000](http://localhost:8000)就能看到你的项目在运行。
 
-## Debugging and common problems
-### Gradle tasks are failing
-If when you invoke gradle, the build or refresh fails to get more information, run the same command again and add the --debug arguments to the command.
-e.g
+## 调试与常见问题
+### Gradle任务失败
+
+如果当你调用gradle时，构建或者刷新未能获得更多信息时(即失败，译者注)，请重新运行同样的命令，并增加 --debug 参数到命令中。例如：
 ```./gradlew tasks --debug```
-This will provide you with a stacktrace and give you a better idea of why gradle is failing.
+这将为你提供堆栈跟踪，并让你更好了解为什么Gradle失败。
 
-### Common problems
-(Confirmed) AVG - When running gradlew desktop:dist antivirus will cause this to fail. Add an exception to your antivirus to allow access.
-### Debugging Projects
+### 常见问题
+(已确认) AVG - 当运行 gradlew desktop:dist 时，杀软会导致失败。 请增加一个例外到杀软来允许运行。
+### 调试项目
 
-## Tweaking
+## 调整
 
-You may be like me and wish to have the output jar from the dist task. Gradle seems to name it as the name of the directory and a version number, which is in my case, desktop-1.0. You may also wish to have each build have a unique version/build date of some kind, do as follows:
-
-In the root project build.gradle, add:
+You may be like me and wish to have the output jar from the dist task. Gradle seems to name it as the name of the directory and a version number, which is in my case, desktop-1.0. 
+You may also wish to have each build have a unique version/build date of some kind, do as follows:
+你可能会和我一样，希望从局部任务导出jar。我感觉Gradle貌似给它的命名同目录和版本号一致，像desktop-1.0。
+你可能也希望让每次构建都有一个以某种方式命名的独特版本号或构建日期，可以这样做：
+在项目根目录的build.gradle文件，增加：
 
     def getDate() {
         def date = new Date()
         def formattedDate = date.format('yyyyMMddHHmmss')
         return formattedDate
     }
-
-(at top level)
+    
+(高级水平)
 
 Within allprojects{}, add: 'version = "0.1-build-" + getDate()'
 
@@ -122,4 +132,4 @@ Within the desktop target add this within task dist(type: Jar) { }...
 
 'baseName = "myproject"'
 
-I'm sure there are better ways, but it took me a while to get together that info and then get it to work/figure out where to put it. You will now have a jar file in your desktop/libs, named something like 'project-0.1-build-20150120033412.jar' which makes distribution a lot easier and more trackable, less conflicts etc.
+我确定还有更好的方式，但那看起来要花费我一段时间来集合那些信息来让它工作或指出把它放在哪里。现在在你desktop/libs目录下有一个命名类似'project-0.1-build-20150120033412.jar'的jar文件，这将使发布更加容易，更易追踪，更少冲突等等。在文件末尾没有换行。
