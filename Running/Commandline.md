@@ -1,28 +1,5 @@
 这一章节将向你展示如何在命令行中运行你的程序，并且打包到不同的平台。
 
-(译者：AyoCrazy  http://www.ayogame.cn/)
-
-## 内容
-* [**前提**](#配置android_home)
- * [配置ANDROID_HOME环境变量] (#配置android_home)
-* [**运行**](#运行项目)
- * [运行在Desktop] (#运行desktop项目)
- * [运行在Android] (#运行android项目)
- * [运行在iOS] (#运行ios项目)
- * [运行HTML] (#运行html项目)
-* [**打包**](#打包项目)
- * [打包Desktop项目](#为desktop项目打包)
- * [打包Android项目](#为android项目打包)
- * [打包iOS项目](#为ios项目打包)
- * [打包HTML项目](#为web项目打包)
-* [**调试/问题**](#调试与常见问题)
- * [Gradle任务失败] (#gradle任务失败)
- * [常见问题] (#常见问题)
- * [调试项目] (#调试项目)
-* [**调整**](#调整)
-
-***
-
 ## 配置ANDROID_HOME
 在你做任何命令行操作之前，ANDROID_HOME环境变量必须指向一个有效的Android SDK。
 
@@ -41,12 +18,16 @@ Gradle让你很方便地在命令行中运行项目。只需要使用gradlew命�
 `gradlew desktop:run`
 
 这条命令编译你的core项目和desktop项目，并且运行desktop启动器。工作路径是android项目的assets文件夹。
+
+如果你运行时遇到了找不到文件的错误，请确保项目路径是正确的。
+
 ### 运行Android项目
+
 `gradlew android:installDebug android:run`
 
-
-这条命令将为你的应用创建一个debug APK(调试安装包)，把它安装在第一次连接的虚拟机或者真机，并且启动main activity(Android的主页面)。
+这条命令将为你的应用创建一个debug APK(调试安装包)，把它安装在第一次连接的虚拟机或者真机，并且启动main activity。
 进程被分到两个任务中，因为Android Gradle插件可以让你为你的应用创建多个flavors。
+
 你可以在[Android Gradle Plugin site](http://tools.android.com/tech-docs/new-build-system/user-guide)找到更多信息。
 
 ### 运行 iOS 项目
@@ -57,6 +38,7 @@ Gradle让你很方便地在命令行中运行项目。只需要使用gradlew命�
 `gradlew ios:launchIOSDevice`
 
 前两条命令将在iPhone或ipad模拟器中启动你的程序，最后一条命令将在一个已连接的真机上运行你的iOS项目，如果已经配置好的话。请参阅Apple的文档关于如何配置真机。请注意，当你第一次运行iOS项目，编译需要很长的时间。编译时间将会在以后的运行中显著降低！
+
 ### 运行HTML项目
 `gradlew html:superDev`
 
@@ -70,14 +52,14 @@ Gradle让你很方便地在命令行中运行项目。只需要使用gradlew命�
 [**Desktop**](#为desktop项目打包) - [**Android**](#为android项目打包) - [**iOS**](#为ios项目打包) - [**HTML**](#为web项目打包)
 
 ### 为desktop项目打包
+
 `gradlew desktop:dist`
 
-This will create a runnable JAR file located in the `desktop/build/libs/` folder. It contains all necessary code as well as all your art assets from the android/assets folder and can be run either by double clicking or on the command line via `java -jar jar-file-name.jar`.
-Your audience must have a JVM installed for this to work. The JAR will work on Windows, Linux and Mac OS X!
 这条命令将在`desktop/build/libs/`目录下创建一个可执行的JAR文件。它包含了所有的必需代码，也包含了所有你在android/assets目录下的资源，并且可以通过双击它或者使用命令行`java -jar jar-file-name.jar`来运行。
 你的用户必需已经为此安装了一个JVM才能运行。JAR文件可以运行在Windows，Linux和Mac OS X!
 
 **如果你想要打包成一个带有JVM的JAR来发布，你可以使用我们的 [packr tool!](https://github.com/libgdx/packr)。用这种方式你的用户就不需要安装JVM，那将花费大约每个平台23-30mb的下载量。
+
 ### 为android项目打包
 `gradlew android:assembleRelease`
 
@@ -89,6 +71,7 @@ Your audience must have a JVM installed for this to work. The JAR will work on W
 
 这条命令将在 `ios/build/robovm` 目录下创建一个你将发布到Apple App Store的IPA。你可以按照Apple的引导来做 [app store distribution](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/Introduction/Introduction.html)。
 ###为web项目打包
+
 `gradlew html:dist`
 
 This will compile your your app to Javascript and place the resulting Javascript, HTML and asset files in the `html/build/dist/` folder. The contents of this folder have to be served up by a web server, e.g. Apache or Nginx. Just treat the contents like you'd treat any other static HTML/Javascript site. There is no Java or Java Applets involved!
@@ -112,10 +95,9 @@ This will compile your your app to Javascript and place the resulting Javascript
 
 ## 调整
 
-You may be like me and wish to have the output jar from the dist task. Gradle seems to name it as the name of the directory and a version number, which is in my case, desktop-1.0. 
-You may also wish to have each build have a unique version/build date of some kind, do as follows:
-你可能会和我一样，希望从局部任务导出jar。我感觉Gradle貌似给它的命名同目录和版本号一致，像desktop-1.0。
+你可能会和我一样，希望从dist任务获得一个jar。Gradle的目录规则是目录加上版本号，像desktop-1.0。
 你可能也希望让每次构建都有一个以某种方式命名的独特版本号或构建日期，可以这样做：
+
 在项目根目录的build.gradle文件，增加：
 
     def getDate() {
@@ -124,12 +106,12 @@ You may also wish to have each build have a unique version/build date of some ki
         return formattedDate
     }
     
-(高级水平)
 
-Within allprojects{}, add: 'version = "0.1-build-" + getDate()'
+在allprojects配置快中新增'version = "0.1-build-" + getDate()'
 
-Within the desktop target add this within task dist(type: Jar) { }...
+在桌面项目中的dist任务中新增
 
 'baseName = "myproject"'
 
-我确定还有更好的方式，但那看起来要花费我一段时间来集合那些信息来让它工作或指出把它放在哪里。现在在你desktop/libs目录下有一个命名类似'project-0.1-build-20150120033412.jar'的jar文件，这将使发布更加容易，更易追踪，更少冲突等等。在文件末尾没有换行。
+可以肯定还有其他更好的处理方法，你可以花些时间来研究。
+现在在你desktop/libs目录下有一个命名类似'project-0.1-build-20150120033412.jar'的jar文件，这将使发布更加容易，更易追踪，更少冲突等等。
