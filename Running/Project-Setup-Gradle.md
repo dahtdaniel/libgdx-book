@@ -21,67 +21,64 @@ Libgdx提供了一些扩展，有部分扩展不能兼容所有平台，对于�
   * [[NetBeans|NetBeans]]
   * [[Commandline|Commandline]]
 
-Note that the Advanced button lets you set the project generation to generate Eclipse and/or IDEA projects **without** Gradle integration, as described in more detail in the wiki article about [workflow without Gradle](Improving-workflow-with-Gradle#how-to-remove-gradle-ide-integration-from-your-project), as well as options to use an alternative repository to Maven Central and to not force downloading dependencies.
+点击"Advanced"按钮可以设置是否生成Eclipse或者IDEA项目文件，也可以设置一个依赖仓库的镜像去下载依赖包。
 
-[[images/Screen%20Shot%202014-04-16%20at%2023.59.48-qVxlZr2zxk.png]]
+国内访问Maven中央仓库有时候很慢，可以考虑使用oschina提供的镜像服务。
+
+[[../Images/gdx-setup.png]]
 
 
-### Creating a libgdx project on the command line
-IF you run it from the command line, specify the following arguments.
+### 使用命令行创建Libgdx项目
 
-* **dir**: the directory to write the project to, relative or absolute
-* **name**: the name of the application, lower-case with minuses is usually a good idea, e.g. mygame
-* **package**: the Java package under which your code will live, e.g. com.badlogic.mygame
-* **mainClass**: the name of the main ApplicationListener of your app, e.g. MyGame
-* **sdkLocation**: the location of your android sdk, Intellij uses this if ANDROID_HOME is not set
+如果你不喜欢使用UI界面，或者不具备使用UI界面的条件，你可以使用命令行直接调用创建工具。
 
-Putting it all together, you can run the project generator on the command line as follows:
+命令行参数有以下几个：
+
+* **dir**: 项目地址，绝对路径和相对路径都可以
+* **name**: 项目的名字
+* **package**: Java包名，比如com.badlogic.mygame
+* **mainClass**: 启动类的名称，比如MyGame
+* **sdkLocation**: Android SDK地址
+
+提供以上参数即可创建项目，比如:
 
 `java -jar gdx-setup.jar --dir mygame --name mygame --package com.badlogic.mygame --mainClass MyGame --sdkLocation mySdkLocation`
 
-### Project layout
-This will create a directory called `mygame`with the following layout:
+### 项目结构
+
+创建好的项目结构如下：
 
 ```
-settings.gradle            <- definition of sub-modules. By default core, desktop, android, html, ios
-build.gradle               <- main Gradle build file, defines dependencies and plugins
-gradlew                    <- script that will run Gradle on Unix systems
-gradlew.bat                <- script that will run Gradle on Windows
-gradle                     <- local gradle wrapper
-local.properties           <- Intellij only file, defines android sdk location
+settings.gradle            <- 定义子模块，比如core, desktop, android, html, ios
+build.gradle               <- Gradle的主要配置文件，声明了依赖和插件
+gradlew                    <- Gradle在Unix 环境的执行脚本
+gradlew.bat                <- Gradle在Windows 环境的执行脚本
+gradle                     <- 本地包装器
+local.properties           <- Intellij专有配置文件，定义android sdk位置
 
 core/
-    build.gradle           <- Gradle build file for core project*
-    src/                   <- Source folder for all your game's code
+    build.gradle           <- Gradle针对core的配置文件
+    src/                   <- 项目代码，包含游戏的主要代码（平台无关）
 
 desktop/
-    build.gradle           <- Gradle build file for desktop project*
-    src/                   <- Source folder for your desktop project, contains Lwjgl launcher class
+    build.gradle           <- Gradle针对desktop的配置文件
+    src/                   <- 桌面项目的启动器和其他平台相关代码
 
 android/
-    build.gradle           <- Gradle build file for android project*
-    AndroidManifest.xml    <- Android specific config
-    assets/                <- contains for your graphics, audio, etc.  Shared with other projects.
-    res/                   <- contains icons for your app and other resources
-    src/                   <- Source folder for your Android project, contains android launcher class
+    build.gradle           <- Gradle针对android的配置文件
+    AndroidManifest.xml    <- Android配置
+    assets/                <- 游戏所需的所有资源文件，包括音乐，图片等等
+    res/                   <- app的图标和其他资源
+    src/                   <- Android项目的启动器和平台相关代码
 
 html/
-    build.gradle           <- Gradle build file for the html project*
-    src/                   <- Source folder for your html project, contains launcher and html definition
-    webapp/                <- War template, on generation the contents are copied to war. Contains startup url index page and web.xml
-
+    build.gradle           <- Gradle针对html的配置文件
+    src/                   <- Html项目的启动器和平台相关代码
+    webapp/                <- War包模板，包含了启动页面和web.xml配置
 
 ios/
-    build.gradle           <- Gradle build file for the ios project*
-    src/                   <- Source folder for your ios project, contains launcher
+    build.gradle           <- Gradle针对iOS的配置文件
+    src/                   <- iOS项目的启动器和平台相关代码
 ```
-\* These scripts contain tasks that package natives and distribute your applications on the respective platforms, you can add/maintain these tasks yourself, but only do so if you are familiar with Gradle, and what these tasks are doing, otherwise you will break your project.
 
-### What is Gradle?
-[Gradle](http://www.gradle.org/) is a dependency management and build system.
-
-A dependency management system is an easy way to pull in 3rd party libraries into your project, without having to store the libraries in your source tree. Instead, the dependency management system relies on a file in your source tree that specifies the names and versions of the libraries you need to be included in your application. Adding, removing and changing the version of a 3rd party library is as easy as changing a few lines in that configuration file. The dependency management system will pull in the libraries you specified from a central repository (in our case [Maven Central](http://search.maven.org/)) and store them in a directory outside of your project.
-
-A build system helps with building and packaging your application, without being tied to a specific IDE. This is especially useful if you use a build or continuous integration server, where IDEs aren't readily available. Instead, the build server can call the build system, providing it with a build configuration so it knows how to build your application for different platforms.
-
-In case of Gradle, both dependency management and build system go hand in hand. Both are configured in the same set of files. See the [[Dependency management with Gradle]] and "Packaging" sections below for more information.
+生成的项目中包含了所有打包本地文件和针对不同的平台的打包分发。请小心修改这些文件，如果你熟悉Gradle和Libgdx项目，那么你可以手动添加或者修改一些任务。
