@@ -7,3 +7,4 @@ Libgdx 中文指南
 贡献者：
 
 * AyoCrazy  [http://www.ayogame.cn/](http://www.ayogame.cn/)
+* 纯洁的坏蛋  [http://www.mwplay.net/](http://www.mwplay.net/)
