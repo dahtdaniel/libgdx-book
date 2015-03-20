@@ -1,6 +1,11 @@
-#### [Check the latest version of libGDX and all dependencies](http://libgdx.badlogicgames.com/versions.html)
+#### [Libgdx的最新版本]
 
-libGDX's Gradle based projects make it very easy to switch between libGDX versions. In general you'll be interested in two types of libGDX builds:
+Libgdx是一个活跃的开源项目，使用较新的版本是一个不错的选择，你可以通过以下网址获取相关信息
+[http://libgdx.badlogicgames.com/versions.html](http://libgdx.badlogicgames.com/versions.html)
+
+Libgdx使用Gradle管理依赖，所以切换Libgdx版本是一件很轻松的事情。
+
+Libgdx和大多数开源项目一样，有两种版本：
 
 * Release builds: these are considered stable. You can see the available release versions on [Maven Central](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.badlogicgames.gdx%22%20AND%20a%3A%22gdx%22).
 * Nightly builds: also known as SNAPSHOT builds in Maven lingo. These are cutting edge versions of libGDX that are built on every change to the source repository. Snapshot builds also have a version number of the form x.y.z-SNAPSHOT, e.g. 1.0.1-SNAPSHOT. You can find the latest SNAPSHOT version string [here](https://github.com/libgdx/libgdx/blob/master/pom.xml#L13).
