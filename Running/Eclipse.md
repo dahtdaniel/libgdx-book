@@ -1,6 +1,6 @@
-你之前[[生成了libgdx项目|用Gradle生成项目]], 现在该是大胆的用eclipse开发的时候了!
+你之前生成了Libgdx项目, 现在该是大胆的用Eclipse开发的时候了!
 
-**在导入项目到Eclipse之前,确保你已经[[配置好开发环境|设置好了开发环境(Eclispe, Intellij IDEA, NetBeans)]]! **
+**在导入项目到Eclipse之前,确保你已经配置好开发环境! **
 
 ## 导入项目
 到 `File -> Import -> Gradle -> Gradle Project`, 选中你的项目根目录, 然后点击 `Build Model`. 等待一会儿, 你将会看到一个根项目和几个子项目 (android, core, desktop, html, ios). 选中所有的项目,然后点击 `Finish`. 注意第一次操作这个过程可能会花费一两分钟,因为后台会下载Gradle和一些必要的依赖文件.
@@ -8,7 +8,7 @@
 ### 常见问题
 你的项目根文件夹和Eclipse工作区(workspace)文件夹一定不能相同(详情见[issue](https://github.com/libgdx/libgdx/issues/1537))
 
-假如你在运行的时候由于丢失 validation-api:1.0.0.GA 出现问题, 请删除 Maven缓存, 一般在`C:\Users\username\.m2` or `/Users/username/.m2` or `/home/username/.m2`.
+假如你在运行的时候由于丢失 validation-api:1.0.0.GA 出现问题, 请删除Maven缓存, 一般在`C:\Users\username\.m2` or `/Users/username/.m2` or `/home/username/.m2`.
 [[images/URxvrYe.png]]
 
 当你在第一次导入项目的时候遇到如下问题:

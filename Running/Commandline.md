@@ -51,7 +51,7 @@ Gradle让你很方便地在命令行中运行项目。只需要使用gradlew命�
 
 [**Desktop**](#为desktop项目打包) - [**Android**](#为android项目打包) - [**iOS**](#为ios项目打包) - [**HTML**](#为web项目打包)
 
-### 为desktop项目打包
+### desktop项目打包
 
 `gradlew desktop:dist`
 
@@ -60,21 +60,20 @@ Gradle让你很方便地在命令行中运行项目。只需要使用gradlew命�
 
 **如果你想要打包成一个带有JVM的JAR来发布，你可以使用我们的 [packr tool!](https://github.com/libgdx/packr)。用这种方式你的用户就不需要安装JVM，那将花费大约每个平台23-30mb的下载量。
 
-### 为android项目打包
+### android项目打包
 `gradlew android:assembleRelease`
 
 这条命令将在`android/build/outputs/apk`目录下创建一个未签名的APK。在你安装或者发布这个APK之前，你必需对它进行签名 [sign it](http://developer.android.com/tools/publishing/app-signing.html)。通过上面的命，APK就以release模式创建完成，你只需要遵循Keytool和Jarsigner步骤。
 你可以安装这个APK文件到任何允许未知源安装的Android设备 [installation from unknown sources](http://developer.android.com/distribute/open.html#unknown-sources)。
 
-### 为ios项目打包
+### ios项目打包
 `gradlew ios:createIPA`
 
 这条命令将在 `ios/build/robovm` 目录下创建一个你将发布到Apple App Store的IPA。你可以按照Apple的引导来做 [app store distribution](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/Introduction/Introduction.html)。
-###为web项目打包
+### web项目打包
 
 `gradlew html:dist`
 
-This will compile your your app to Javascript and place the resulting Javascript, HTML and asset files in the `html/build/dist/` folder. The contents of this folder have to be served up by a web server, e.g. Apache or Nginx. Just treat the contents like you'd treat any other static HTML/Javascript site. There is no Java or Java Applets involved!
 这条命令会将你的应用编译成为Javascript，并且将编译好的Javascript，Html和资源文件放到`html/build/dist/`目录下。这个目录下的内容必须部署到一个Web服务器上，例如Apache或者Nginx。就像你对待其他的静态HTML/Javascript站点一样。这里不再涉及到Java或者Java Applets。
 如果你已经安装了Python，你可以通过在 `html/build/dist`目录下执行以下命令来测试你发布的应用。
 
