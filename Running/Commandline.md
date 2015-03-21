@@ -12,8 +12,6 @@ Linux, Mac OS X: `export ANDROID_HOME=/Path/To/Your/Android/Sdk`
 ## 运行项目
 Gradle让你很方便地在命令行中运行项目。只需要使用gradlew命令行指定你的目标平台，以及使用该平台的运行命令。
 
-[**Desktop**](#运行desktop项目) - [**Android**](#运行android项目) - [**iOS**](#运行ios项目) - [**HTML**](#运行html项目)
-
 ### 运行desktop项目
 `gradlew desktop:run`
 
@@ -48,8 +46,6 @@ Gradle让你很方便地在命令行中运行项目。只需要使用gradlew命�
 
 ## 打包项目
 每个平台都有不同的发布方式。在这一节我们来看看如何通过Gradle来打包发布。
-
-[**Desktop**](#为desktop项目打包) - [**Android**](#为android项目打包) - [**iOS**](#为ios项目打包) - [**HTML**](#为web项目打包)
 
 ### desktop项目打包
 
