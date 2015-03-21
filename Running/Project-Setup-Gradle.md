@@ -16,16 +16,16 @@ Libgdx提供了一些扩展，有部分扩展不能兼容所有平台，对于�
 
 **项目文件生成后，你就可以导入到IDE并运行和调试了。**
 
-  * [[Eclipse|Eclipse]]
-  * [[Intellij IDEA|Intellij-Idea]]
-  * [[NetBeans|NetBeans]]
-  * [[Commandline|Commandline]]
+  * [Eclipse](Eclipse.html)
+  * [Intellij-Idea](Intellij-Idea.html)
+  * [NetBeans](NetBeans.html)
+  * [Commandline](Commandline.html)
 
 点击"Advanced"按钮可以设置是否生成Eclipse或者IDEA项目文件，也可以设置一个依赖仓库的镜像去下载依赖包。
 
 国内访问Maven中央仓库有时候很慢，可以考虑使用oschina提供的镜像服务。
 
-[[../Images/gdx-setup.png]]
+![gdx-setup](../Images/gdx-setup.png)
 
 
 ### 使用命令行创建Libgdx项目
