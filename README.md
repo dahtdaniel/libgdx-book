@@ -42,4 +42,8 @@ Libgdx 中文指南
 npm install -g gitbook
 gitbook serve libgdx-book
 ```
+构建检查
+--------
+
+[![状态](https://snap-ci.com/htynkn/libgdx-book/branch/master/build_image)](https://snap-ci.com/htynkn/libgdx-book/branch/master)
 
