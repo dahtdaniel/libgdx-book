@@ -1,20 +1,40 @@
-You just [[generated your libgdx project|Project Setup Gradle]], now it's time to start developing its guts in Intellij IDEA! Before you can import your project into Intellij, make sure you [[setup your development environment|Setting up your Development Environment (Eclipse, Intellij IDEA, NetBeans)]]!
+你已经生成你的libgdx项目,现在是时候开始使用IntelliJ IDEA了。
+你您可以将项目导入到IntelliJ IDEA之前,请确保你设置好了你的开发环境。
 
-## Importing Your Project
-Go to `Import Project`, navigate to your project folder and select the `build.gradle` file. Hit `OK`. In the next dialog, leave all settings as they are and hit `OK` again. Intellij IDEA will now import your project. This can take a while on the first time, as it downloads the Gradle wrapper and some dependencies.
 
-### Common Problems
-If you run into problems due to a missing validation-api:1.0.0.GA artifact, delete your Maven cache at `C:\Users\username\.m2` or `/Users/username/.m2` or `/home/username/.m2`.
+## 导入项目
+点击`Import Project`,定位到你的项目文件夹,然后选择`build.gradle`文件。点击`OK`。
+在下一个对话框中,请将所有设置并再次单击`OK`。
+IntelliJ IDEA现在开始导入你的项目。
+第一次导入可能要花一段时间,因为它会下载gradle wrapper和一些依赖。
 
-`Unsupported major.minor version 51.0` may occur on Mac OS X. If this is your first project using Intellij IDEA, make sure to define your JDK at the global level: see this [help page](https://www.jetbrains.com/idea/help/configuring-global-project-and-module-sdks.html#d2125997e12) to do so, or alternatively from the welcome screen go to `Configure -> Project Defaults -> Project Structure` then add your JDK in `Platform Settings -> SDKs`.  Otherwise, check out [this article by Serapth](http://www.gamefromscratch.com/post/2014/04/03/Troubleshooting-IntelliJLibGDXRoboVMGradle-issues-on-Mac-OS.aspx) detailing other possible causes and fixes for this issue (just be warned that it is not recommended to edit Intellij's Info.plist, as the app is digitally signed).
+### 常见问题
+如果您在使用过程中遇到缺少validation-api:1.0.0.GA的问题,删除Maven缓存，它们通常位于`C:\Users\username\.m2` 或者` /home/username/.m2`。
+在Mac OS X上出现“Unsupported major.minor version 51.0”错误。如果这是你使用IntelliJ IDEA的第一个项目,请确保设置了JDK。
+请参阅[帮助页面]((https://www.jetbrains.com/idea/help/configuring-global-project-and-module-sdks.html#d2125997e12)),或者从欢迎屏幕转到Configure -> Project Defaults -> Project Structure then add your JDK in Platform Settings -> SDKs。
 
-If you run into "Error:org.gradle.tooling.GradleConnectionException: Could not execute build using Gradle installation" check project structure ( Ctrl + Alt + Shift + S ) and add your java JDK to the Project SDK.
+如果你遇到“Error:org.gradle.tooling.GradleConnectionException：Could not execute build using Gradle installation“错误，
+检查项目结构(Ctrl+Alt+Shift+S)并添加Java JDK设置。
 
-## Running Your Project
+## 运行项目
 
-  * **Desktop**: `Run -> Edit Configurations...`, click the plus (+) button and select `Application`. Set the `Name`to `Desktop`.Set the field `Use classpath of module` to `desktop`, then click on the button of the `Main class` field and select the `DesktopLauncher` class. Set the `Working directory` to your `android/assets/` (or `your_project_path/core/assets/`) folder! Click `Apply` and then `OK`. You have now created a run configuration for your desktop project. You can now select the configuration and run it.
-  * **Android**: A configuration for the Android project should be automatically created on project import. As such, you only have to select the configuration and run it!
-  * **iOS**: `Run -> Edit Configurations...`, click the plus (+) button and select `Gradle`. Set the `Name` to `iOS`, set the `Gradle Project` to `ios`, set the `Tasks` to `launchIPhoneSimulator` (alternatives are `launchIPadSimulator` and `launchIOSDevice`for [provisioned devices](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/Introduction/Introduction.html)). Click `Apply` and then `OK`. You have now created a run configuration for your iOS project. You can now select the configuration and run it. The first run will take a bit longer as RoboVM has to compile the entire JDK for iOS. Subsequent runs will compile considerably faster!
+### 桌面
+`Run ->Edit Configurations...`,单击加号(+)按钮,然后选择`Application`。
+运行桌面程序之前，选择使用桌面的模块的classpath,然后选择desktoplauncher类作为`Main Class`。
+将工作目录设置为`android/assets/`(或core/assets/)文件夹。
+点击`Apply`,然后单击OK。
+现在,您已经创建了一个运行的桌面项目配置。
+现在,您可以选择配置并运行它。
+
+### Android
+导入项目时会自动创建一个Android项目的配置。
+因此,您只需要选择配置,然后运行它即可。
+
+### iOS
+`Run ->Edit Configurations...`,单击加号(+)按钮,然后选择`Gradle`。
+在gradle列表中选择launchiphonesimulator任务。你还可以选择launchIPadSimulator或者launchIOSDevicefor任务。
+点击`Apply`,然后单击OK。
+现在,你已经创建了一个运行iOS项目的配置
 
   * **HTML**: `View -> Tool Window -> Terminal`, in the terminal, make sure you are in the root folder of your project. Then execute `gradlew.bat html:superDev` (Windows) or `./gradlew html:superDev` (Linux, Mac OS X). This will take a while, as your Java code is compiled to Javascript. Once you see the message `The code server is ready`, fire up your browser and go to  [http://localhost:8080/html](http://localhost:8080/html). This is your app running in the browser! When you change any of your Java code or assets, just click the `SuperDev refresh` button while you are on the site and the server will recompile your code and reload the page! To kill the process, simply press `CTRL + C` in the terminal window.
 
