@@ -1,16 +1,17 @@
 你已经生成你的libgdx项目,现在是时候开始使用IntelliJ IDEA了。
 你您可以将项目导入到IntelliJ IDEA之前,请确保你设置好了你的开发环境。
 
-
 ## 导入项目
-点击`Import Project`,定位到你的项目文件夹,然后选择`build.gradle`文件。点击`OK`。
+点击`Import Project`,定位到你的项目文件夹,然后选择`build.gradle`文件，点击`OK`。
 在下一个对话框中,请将所有设置并再次单击`OK`。
 IntelliJ IDEA现在开始导入你的项目。
+
 第一次导入可能要花一段时间,因为它会下载gradle wrapper和一些依赖。
 
 ### 常见问题
 如果您在使用过程中遇到缺少validation-api:1.0.0.GA的问题,删除Maven缓存，它们通常位于`C:\Users\username\.m2` 或者` /home/username/.m2`。
-在Mac OS X上出现“Unsupported major.minor version 51.0”错误。如果这是你使用IntelliJ IDEA的第一个项目,请确保设置了JDK。
+如果在Mac OS X上出现“Unsupported major.minor version 51.0”错误且这是你使用IntelliJ IDEA的第一个项目,请确保正确设置了JDK。
+
 请参阅[帮助页面]((https://www.jetbrains.com/idea/help/configuring-global-project-and-module-sdks.html#d2125997e12)),或者从欢迎屏幕转到Configure -> Project Defaults -> Project Structure then add your JDK in Platform Settings -> SDKs。
 
 如果你遇到“Error:org.gradle.tooling.GradleConnectionException：Could not execute build using Gradle installation“错误，
@@ -34,19 +35,36 @@ IntelliJ IDEA现在开始导入你的项目。
 `Run ->Edit Configurations...`,单击加号(+)按钮,然后选择`Gradle`。
 在gradle列表中选择launchiphonesimulator任务。你还可以选择launchIPadSimulator或者launchIOSDevicefor任务。
 点击`Apply`,然后单击OK。
-现在,你已经创建了一个运行iOS项目的配置
+现在,你已经创建了一个运行iOS项目的配置。
 
-  * **HTML**: `View -> Tool Window -> Terminal`, in the terminal, make sure you are in the root folder of your project. Then execute `gradlew.bat html:superDev` (Windows) or `./gradlew html:superDev` (Linux, Mac OS X). This will take a while, as your Java code is compiled to Javascript. Once you see the message `The code server is ready`, fire up your browser and go to  [http://localhost:8080/html](http://localhost:8080/html). This is your app running in the browser! When you change any of your Java code or assets, just click the `SuperDev refresh` button while you are on the site and the server will recompile your code and reload the page! To kill the process, simply press `CTRL + C` in the terminal window.
+第一次运行会花费较长的时间，因为robovm会编译整个JDK。
+随后的运行编译速度将要快得多!
 
-  **IMPORTANT** The port `9876` is used when doing normal GWT development. Therefore, trying to access the game in any other way than using the port `8080` will not launch your project.
+### HTML
+选择`View -> Tool Window -> Terminal`，确保此时你位于项目根目录。
+执行`gradlew.bat html:superDev` (Windows) 或者 `./gradlew html:superDev` (Linux, Mac OS X)。
 
-Once this [bug in the Gradle tooling API](http://issues.gradle.org/browse/GRADLE-1539) is fixed, we can simplify running the HTML5 by using the Gradle integration. At the moment, the Gradle process will run forever even if canceled.
-## Debugging Your Project
-Follow the steps for running the project, but instead of launching via the run (Play) button, launch your configuration via the debug (bug) button. Note that RoboVM currently does not support debugging. Debugging of the html build can be done in the browser as follows:
+这将需要一些时间,因为你的Java代码被编译为JavaScript。
+一旦你看到了代码服务器已准备就绪的消息,启动你的浏览器并转到http://localhost:8080/html。
+就可以看到你的应用程序在浏览器中运行。
 
-Run the superDev Gradle task as before. Go to [http://localhost:8080/html](http://localhost:8080/html), click on the `SuperDev Refresh` button and hit `Compile`. In Chrome, press `F12` to bring up the developer tools, go to the sources tab and find the Java file you want to debug. Set breakpoints, step and inspect variables using the power of source maps!
+当你更改任何Java代码或assert中的资源文件时时,只需单击“refresh”按钮，服务将重新编译你的代码并重新加载该页面。
+终止该进程,只需简单地在终端窗口中按下Ctrl+C。
 
-[[images/Screen%20Shot%202014-03-23%20at%2019.11.27-BkaIpjttPQ.png]]
+提示，端口9876会被GWT开发过程中会被占用。
+此外,以任何其他方式尝试使用端口8080访问游戏都不会自动启动你的项目。
 
-## Packaging your Project
-It's easiest to package your application from the command line, or using the Gradle task within Intellij IDEA. To see the relevant Gradle tasks, check the [[Gradle command line documentation|Gradle on the Commandline]].
+该进程将运行一直gradle直到被取消。
+## 调试项目
+请按照以下步骤操作,运行该项目,唯一区别在于不要通过运行按钮与西宁，而是启动调试按钮。
+请注意,RoboVM当前不支持调试。
+调试的HTML项目可以直接在浏览器操作，参考以下步骤：
+
+* 运行superdev gradle任务。
+* 跳转到[http://localhost:8080/html](http://localhost:8080/html)，点击刷新按钮。
+* 在Chrome浏览器中,按下F12开启开发人员工具,请转至“Source”选项卡,然后找到你要调试的Java文件。
+* 你可以设置断点、单步跟进和检查变量。
+
+## 打包项目
+最简便的方法是从命令行,或使用IntelliJ IDEA内的gradle任务打包应用程序。
+相关细节查看gradle有关任务或者看到gradle命令行的文档。
