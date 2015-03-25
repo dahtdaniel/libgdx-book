@@ -1,4 +1,4 @@
-#### [Libgdx的最新版本]
+#### Libgdx版本升级
 
 Libgdx是一个活跃的开源项目，使用较新的版本是一个不错的选择，你可以通过以下网址获取相关信息
 [http://libgdx.badlogicgames.com/versions.html](http://libgdx.badlogicgames.com/versions.html)
@@ -7,10 +7,10 @@ Libgdx使用Gradle管理依赖，所以切换Libgdx版本是一件很轻松的�
 
 Libgdx和大多数开源项目一样，有两种版本：
 
-* Release builds: these are considered stable. You can see the available release versions on [Maven Central](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.badlogicgames.gdx%22%20AND%20a%3A%22gdx%22).
-* Nightly builds: also known as SNAPSHOT builds in Maven lingo. These are cutting edge versions of libGDX that are built on every change to the source repository. Snapshot builds also have a version number of the form x.y.z-SNAPSHOT, e.g. 1.0.1-SNAPSHOT. You can find the latest SNAPSHOT version string [here](https://github.com/libgdx/libgdx/blob/master/pom.xml#L13).
+* Release版本: 稳定版本。你可以在[Maven Central](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.badlogicgames.gdx%22%20AND%20a%3A%22gdx%22)查看版本号。
+* Nightly版本: 俗称快照版本。每个提交到代码仓库的修改都会触发快照版本的生成。快照版本一般为版本号加上SNAPSHOT，比如 1.0.1-SNAPSHOT. 你可以在 [这里](https://github.com/libgdx/libgdx/blob/master/pom.xml#L13)查看快照版本。
 
-Your Gradle based project makes it very easy to switch between releases and nightly builds. Open up the `build.gradle` file in the root of your project, and locate the following line:
+基于Gradle的项目更换版本是一件非常轻松的事情。打开`build.gradle` 文件，然后找到如下声明:
 
 ```Groovy
  gdxVersion = "1.5.2"
