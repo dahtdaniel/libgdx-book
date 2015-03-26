@@ -1,4 +1,4 @@
-#### Libgdx版本升级
+#### Libgdx版本管理
 
 Libgdx是一个活跃的开源项目，使用较新的版本是一个不错的选择，你可以通过以下网址获取相关信息
 [http://libgdx.badlogicgames.com/versions.html](http://libgdx.badlogicgames.com/versions.html)
@@ -15,13 +15,12 @@ Libgdx和大多数开源项目一样，有两种版本：
 ```Groovy
  gdxVersion = "1.5.2"
 ```
+你现在看到的版本可能已经高于1.5.2了。在你需要的时候，你只需要确定版本字段的内容，你就可以简单地升级Libgdx版本（或者降级）。同样的，你还可以升级在Gradle管理下的依赖。编辑完成后保存`build.gradle`文件。
 
-The version you see may be higher than 1.5.2 already. Once you've located that string, you can simply change it to the latest release (or an older release) or to the current SNAPSHOT version. You may also have to update other modules in that same section of the build.gradle file, based on the [versions listing](http://libgdx.badlogicgames.com/versions.html). Once edited, save the build.gradle file.
+接下来的步骤和你的IDE有关:
 
-The next step is dependent on your IDE:
-
-* **Eclipse**: Select all your projects in the package explorer, right click, then click `Gradle -> Refresh All`. This will download the libGDX version you specified in build.gradle and wire up the JAR files with your projects correctly.
-* **Intellij IDEA**: will usually detect that your build.gradle has been updated and show a refresh button. Just click it and IDEA will update libGDX to the version you specified in build.gradle. Go into the gradle tasks panel/tool view and click the refresh button. Running a task like 'builddependents' also tends to do this.
+* **Eclipse**: 在package explore中选择所有项目，右键选择 `Gradle -> Refresh All`。 Eclipse会自动下载依赖然后将下载的jar文件配置到项目中。
+* **Intellij IDEA**: 一旦你的build.gradle文件修改，IDE会自动显示一个刷新按钮供。点击以后，IDE会自动下载依赖。你也可以到Gradle视图中找到刷新按钮或者'builddependents'任务并点击。
 * **Netbeans**: in the "Projects" view, right-click the top-most project node and select "Reload Project".  All sub-projects will also be reloaded with the new files.
 * **Command Line**: invoking any of the tasks will usually check for changes in dependency versions and redownload anything that changed.
 
