@@ -21,7 +21,7 @@ Libgdx和大多数开源项目一样，有两种版本：
 
 * **Eclipse**: 在package explore中选择所有项目，右键选择 `Gradle -> Refresh All`。 Eclipse会自动下载依赖然后将下载的jar文件配置到项目中。
 * **Intellij IDEA**: 一旦你的build.gradle文件修改，IDE会自动显示一个刷新按钮供。点击以后，IDE会自动下载依赖。你也可以到Gradle视图中找到刷新按钮或者'builddependents'任务并点击。
-* **Netbeans**: in the "Projects" view, right-click the top-most project node and select "Reload Project".  All sub-projects will also be reloaded with the new files.
-* **Command Line**: invoking any of the tasks will usually check for changes in dependency versions and redownload anything that changed.
+* **Netbeans**: 在"Projects"视图中, 选中主项目右键选择"Reload Project"。  所有子项目都会自动重新加载。
+* **Command Line**: 调用任何命令都会自动下载新版本依赖并运用。
 
-And that's it! No need to manually juggle JAR files, .so files or anything else. Just change a string in a file and update via your IDE or the command line.
+使用Gradle管理版本就是这么简单。不需要手动下载jar，so文件或者其他任何东西了。只需要修改版本号，然后在IDE或者命令行中执行相应的刷新就行了。
