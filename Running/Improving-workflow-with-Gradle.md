@@ -1,17 +1,4 @@
-# Contents
-
-* [**Introduction**] (#introduction)
-* [**Optimizing Gradle integration in your IDE and on the command line**] (#tips-to-speed-up-gradle-if-you-still-want-ide-integration)
- * [**Gradle Daemon**] (#gradle-daemon)
- * [**Configuration on Demand**] (#configuration-on-demand)
-* [**Removing Gradle integration from your IDE**] (#how-to-remove-gradle-ide-integration-from-your-project)
- * [**Intellij IDEA**] (#creating-your-idea-project)
- * [**Eclipse**] (#creating-your-eclipse-project)
-* [**LibGDX without Gradle**] (#libgdx-without-gradle)
-* [**Why does LibGDX recommend Gradle**] (#why-does-libgdx-recommend-gradle)
-
-
-## Introduction
+## 简介
 Gradle is very powerful, and once you get used to it is a great tool to be versed in and to have in your arsenal, but when mixed with your IDE it can cause workflow problems.  This varies from project to project, and from person to person; here is an example of such an issue:
 
 Having a multi-project, multi-flavour project, where you want to be running your desktop build very often to check your latest changes.  Due to how Gradle works (it allows the flexibility of accessing and changing any part of the build from any part of the project), it must configure all projects in a multi-project setup before any task is executed.  When you have a project with desktop only, this is usually very speedy, but when you add in an android project, html project the time starts to rack up.  This is especially noticeable in Intellij IDEA.
@@ -20,7 +7,7 @@ Having a multi-project, multi-flavour project, where you want to be running your
 
 You can try a few things to get running more efficiently:
 
-### Gradle daemon
+### daemon模式
 The Gradle daemon aims to lower execution time and startup time of tasks especially where tasks are executed frequently.
 
 You can run tasks with the daemon by adding the `--daemon` flag.
@@ -31,7 +18,7 @@ Add the line: `org.gradle.daemon=true`
 _Further reading:_
 _Daemon http://www.gradle.org/docs/current/userguide/gradle_daemon.html_
 
-### Configuration on Demand
+### Demand配置
 This setting helps to solve the issue of Gradle configuring the world before execution.  Using this setting, the root project is always configured, the project in the directory where the build is executed is configured, and only dependent projects are configured, resulting in much faster build times.
 
 To use this setting add the following to the `gradle.properties` file in the root directory of your project:
@@ -49,7 +36,7 @@ Doing this allows you to keep Gradle out of your IDE, so that when you want to l
 
 It also allows you to keep the power of Gradle at your disposal, to handle all your dependencies, packaging tasks, signing tasks, deployment and anything else you may want to implement by running from the command line.
 
-### Creating your IDEA project
+### 创建IDEA项目
 From the command line, run the following command from your project root directory:
 (If on a UNIX based OS, use ./gradlew to invoke gradle)
 ```groovy
@@ -58,7 +45,7 @@ gradlew idea
 
 In IDEA:
 File > OPEN > Locate the .ipr that the task above generates
-### Creating your Eclipse Project
+### 创建Eclipse项目
 From the command line, run the following command from your project root directory:
 (If on a UNIX based OS, use ./gradlew to invoke gradle)
 ```groovy
